@@ -11,7 +11,14 @@ const artists = [
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSent(true); };
+  const [musicOn, setMusicOn] = useState(false);
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const registration = Object.fromEntries(new FormData(event.currentTarget));
+    const entries = JSON.parse(localStorage.getItem("deathar-registrations") || "[]");
+    localStorage.setItem("deathar-registrations", JSON.stringify([...entries, { ...registration, createdAt: new Date().toISOString() }]));
+    setSent(true);
+  };
 
   return <main>
     <nav className="nav wrap">
@@ -26,11 +33,13 @@ export default function Home() {
       <div className="hero-copy wrap">
         <p className="eyebrow">AKIIN PRESENTS <span /> CHAPTER 007</p>
         <h1>THE<br /><em>AFTER</em><br />HOUR</h1>
-        <div className="hero-bottom"><p>WHEN THE SUN FALLS,<br />THE SOUND RISES.</p><button className="primary" onClick={() => setOpen(true)}>Reserve your night <b>→</b></button></div>
+        <div className="hero-bottom"><p>WHEN THE SUN FALLS,<br />THE SOUND RISES.</p><div className="offer-cta"><span>PRE-ORDER · <b>20% OFF</b></span><button className="primary" onClick={() => setOpen(true)}>Grab now <b>→</b></button></div></div>
       </div>
+      <div className="hero-marquee" aria-hidden="true"><div>DEATHAR — THE AFTER HOUR — CHAPTER 007 — DEATHAR — THE AFTER HOUR — CHAPTER 007 — </div></div>
       <div className="date-card"><small>OCTOBER</small><strong>07</strong><span>2026</span></div>
       <p className="side-label">COLOMBO · SRI LANKA</p>
       <a className="scroll" href="#experience">SCROLL TO ENTER <span>↓</span></a>
+      <button className="music-toggle" onClick={() => setMusicOn(!musicOn)}>{musicOn ? "◼ Pause sound" : "▶ Play soundtrack"}</button>
     </section>
 
     <section className="intro wrap" id="experience">
@@ -41,10 +50,11 @@ export default function Home() {
 
     <section className="lineup" id="lineup"><div className="wrap"><p className="section-no">02 — SONIC ARCHITECTS</p><div className="section-title"><h2>The ones<br />who <i>move us.</i></h2><p>Handpicked selectors. No filler.<br />Only the feeling.</p></div><div className="artist-grid">{artists.map((artist, index) => <article className={`artist ${artist.tone}`} key={artist.name}><div className="artist-art"><span>{String(index + 1).padStart(2, "0")}</span><div className="orb" /></div><div className="artist-info"><p>{artist.role}</p><h3>{artist.name}</h3><a href="#tickets">Discover artist <b>↗</b></a></div></article>)}</div></div></section>
 
-    <section className="tickets wrap" id="tickets"><p className="section-no">03 — SECURE YOUR PLACE</p><div className="ticket-heading"><h2>Choose your<br /><i>entry point.</i></h2><p>Limited quantities. Once a tier is gone,<br />it&apos;s gone for good.</p></div><div className="ticket-grid"><article className="ticket"><p>01 / EARLY ACCESS</p><h3>GRAB YOUR<br />TICKETS</h3><strong>LKR 10,000</strong><span>First release · Limited to 100</span><button onClick={() => setOpen(true)}>Claim access <b>→</b></button></article><article className="ticket ticket-dark"><p>02 / FULL EXPERIENCE</p><h3>DEATHAR<br />PASS</h3><strong>LKR 15,000</strong><span>Priority entry · Event keepsake</span><button onClick={() => setOpen(true)}>Claim access <b>→</b></button></article></div></section>
+    <section className="tickets wrap" id="tickets"><p className="section-no">03 — SECURE YOUR PLACE</p><div className="ticket-heading"><h2>Choose your<br /><i>entry point.</i></h2><p>Pre-order now and receive <b>20% off.</b><br />Limited quantities. Once a tier is gone, it&apos;s gone.</p></div><div className="ticket-grid"><article className="ticket"><p>01 / EARLY ACCESS · 20% OFF</p><h3>GRAB YOUR<br />TICKETS</h3><strong>LKR 8,000 <del>LKR 10,000</del></strong><span>Pre-order release · Limited to 100</span><button onClick={() => setOpen(true)}>Grab now <b>→</b></button></article><article className="ticket ticket-dark"><p>02 / FULL EXPERIENCE · 20% OFF</p><h3>DEATHAR<br />PASS</h3><strong>LKR 12,000 <del>LKR 15,000</del></strong><span>Pre-order · Priority entry · Event keepsake</span><button onClick={() => setOpen(true)}>Grab now <b>→</b></button></article></div></section>
 
     <footer><div className="wrap footer-inner"><a className="wordmark" href="#top">DEATHAR<span>®</span></a><p>AN AKIIN EXPERIENCE<br />COLOMBO, SRI LANKA</p><p>FOLLOW THE FREQUENCY<br /><a href="#top">INSTAGRAM ↗</a></p></div></footer>
 
-    {open && <div className="modal-backdrop" onMouseDown={() => setOpen(false)}><div className="modal" onMouseDown={e => e.stopPropagation()}>{sent ? <div className="success"><span>✦</span><h2>You&apos;re on<br /><i>the list.</i></h2><p>We&apos;ll send ticket details to your inbox shortly.</p><button className="primary" onClick={() => { setOpen(false); setSent(false); }}>Back to Deathar</button></div> : <><button className="close" onClick={() => setOpen(false)}>×</button><p className="section-no">CHAPTER 007 — REGISTRATION</p><h2>Enter the<br /><i>after hour.</i></h2><form onSubmit={submit}><label>Full name<input required placeholder="Your name" /></label><label>Email address<input type="email" required placeholder="you@example.com" /></label><label>Ticket selection<select defaultValue=""><option value="" disabled>Select your entry</option><option>Early Access — LKR 10,000</option><option>Deathar Pass — LKR 15,000</option></select></label><button className="primary" type="submit">Request tickets <b>→</b></button></form></>}</div></div>}
+    <iframe className="music-frame" title="Deathar soundtrack" src={musicOn ? "https://www.youtube.com/embed/y1k60lALpvE?list=RDy1k60lALpvE&autoplay=1" : "https://www.youtube.com/embed/y1k60lALpvE?list=RDy1k60lALpvE&mute=1"} allow="autoplay; encrypted-media" />
+    {open && <div className="modal-backdrop" onMouseDown={() => setOpen(false)}><div className="modal" onMouseDown={e => e.stopPropagation()}>{sent ? <div className="success"><span>✦</span><h2>You&apos;re on<br /><i>the list.</i></h2><p>We&apos;ll send ticket details to your inbox shortly.</p><button className="primary" onClick={() => { setOpen(false); setSent(false); }}>Back to Deathar</button></div> : <><button className="close" onClick={() => setOpen(false)}>×</button><p className="section-no">CHAPTER 007 — REGISTRATION</p><h2>Enter the<br /><i>after hour.</i></h2><form onSubmit={submit}><label>Full name<input name="name" required placeholder="Your name" /></label><label>Email address<input name="email" type="email" required placeholder="you@example.com" /></label><label>Contact number<input name="phone" type="tel" required placeholder="077 123 4567" /></label><div className="form-row"><label>Age<input name="age" type="number" required min="18" max="99" placeholder="18+" /></label><label>Hometown<input name="hometown" required placeholder="Colombo" /></label></div><label>Ticket selection<select name="ticket" defaultValue=""><option value="" disabled>Select your entry</option><option>Early Access — LKR 10,000</option><option>Deathar Pass — LKR 15,000</option></select></label><button className="primary" type="submit">Request tickets <b>→</b></button></form></>}</div></div>}
   </main>;
 }
