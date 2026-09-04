@@ -7,7 +7,7 @@ const artists = [{ name: "DJ AKIIY", role: "HEADLINER", tone: "gold", image: "/i
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const [musicOn, setMusicOn] = useState(false);
+  const [musicOn, setMusicOn] = useState(true);
   const [flyerOpen, setFlyerOpen] = useState(true);
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -54,7 +54,7 @@ export default function Home() {
 
     <footer><div className="wrap footer-inner"><a className="wordmark" href="#top">DEATHAR<span>®</span></a><p>AN AKIIN EXPERIENCE<br />COLOMBO, SRI LANKA</p><p>FOLLOW THE FREQUENCY<br /><a href="#top">INSTAGRAM ↗</a></p></div></footer>
 
-    <iframe className="music-frame" title="Deathar soundtrack" src={musicOn ? "https://www.youtube.com/embed/y1k60lALpvE?list=RDy1k60lALpvE&autoplay=1" : "https://www.youtube.com/embed/y1k60lALpvE?list=RDy1k60lALpvE&mute=1"} allow="autoplay; encrypted-media" />
+    <iframe className="music-frame" title="Deathar soundtrack" src={musicOn ? "https://www.youtube.com/embed/y1k60lALpvE?autoplay=1&loop=1&playlist=y1k60lALpvE" : "https://www.youtube.com/embed/y1k60lALpvE?autoplay=0"} allow="autoplay; encrypted-media" />
     {open && <div className="modal-backdrop" onMouseDown={() => setOpen(false)}><div className="modal" onMouseDown={e => e.stopPropagation()}>{sent ? <div className="success"><span>✦</span><h2>You&apos;re on<br /><i>the list.</i></h2><p>We&apos;ll send ticket details to your inbox shortly.</p><button className="primary" onClick={() => { setOpen(false); setSent(false); }}>Back to Deathar</button></div> : <><button className="close" onClick={() => setOpen(false)}>×</button><p className="section-no">CHAPTER 007 — REGISTRATION</p><h2>Enter the<br /><i>after hour.</i></h2><form onSubmit={submit}><label>Full name<input name="name" required placeholder="Your name" /></label><label>Email address<input name="email" type="email" required placeholder="you@example.com" /></label><label>Contact number<input name="phone" type="tel" required placeholder="077 123 4567" /></label><div className="form-row"><label>Age<input name="age" type="number" required min="18" max="99" placeholder="18+" /></label><label>Hometown<input name="hometown" required placeholder="Colombo" /></label></div><label>Ticket selection<select name="ticket" defaultValue=""><option value="" disabled>Select your entry</option><option>Early Access — LKR 10,000</option><option>Deathar Pass — LKR 15,000</option></select></label><button className="primary" type="submit">Request tickets <b>→</b></button></form></>}</div></div>}
   </main>;
 }
