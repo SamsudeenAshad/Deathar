@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./admin.css";
 
 type Registration = { name: string; email: string; phone: string; age: string; hometown: string; ticket: string; createdAt: string };
-const defaultArtists = ["DJ AKIL", "MALINDA", "K!NO"];
+const defaultArtists = ["DJ AKIIY", "MALINDA", "K!NO"];
 
 export default function AdminPage() {
   const [tab, setTab] = useState("Overview");

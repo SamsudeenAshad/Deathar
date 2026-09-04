@@ -2,11 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-const artists = [
-  { name: "DJ AKIL", role: "HEADLINER", tone: "gold" },
-  { name: "MALINDA", role: "LIVE SET", tone: "red" },
-  { name: "K!NO", role: "OPENING ACT", tone: "stone" },
-];
+const artists = [{ name: "DJ AKIIY", role: "HEADLINER", tone: "gold", image: "/images/dj-akil-lineup.png" }];
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -22,7 +18,7 @@ export default function Home() {
   };
 
   return <main>
-    {flyerOpen && <div className="flyer-ad" role="dialog" aria-modal="true" aria-label="DJ Akil event announcement"><div className="flyer-glow" /><div className="flyer-card"><button className="flyer-close" onClick={() => setFlyerOpen(false)} aria-label="Close advertisement">×</button><div className="flyer-image-wrap"><img src="/images/dj-akil-flyer.png" alt="DJ Akil performing artist flyer for Deathar Chapter 007" /><span className="flyer-shine" /></div><div className="flyer-actions"><div><p>CHAPTER 007 · PERFORMING ARTIST</p><h2>DJ AKIL</h2></div><button className="primary" onClick={() => { setFlyerOpen(false); setOpen(true); }}>Grab tickets <b>→</b></button></div></div><button className="flyer-skip" onClick={() => setFlyerOpen(false)}>Enter Deathar <span>↓</span></button></div>}
+    {flyerOpen && <div className="flyer-ad" role="dialog" aria-modal="true" aria-label="DJ Akiiy event announcement"><div className="flyer-glow" /><div className="flyer-card"><button className="flyer-close" onClick={() => setFlyerOpen(false)} aria-label="Close advertisement">×</button><div className="flyer-image-wrap"><img src="/images/dj-akil-flyer.png" alt="DJ Akiiy performing artist flyer for Deathar Chapter 007" /><span className="flyer-shine" /></div><div className="flyer-actions"><div><p>CHAPTER 007 · PERFORMING ARTIST</p><h2>DJ AKIIY</h2></div><button className="primary" onClick={() => { setFlyerOpen(false); setOpen(true); }}>Grab tickets <b>→</b></button></div></div><button className="flyer-skip" onClick={() => setFlyerOpen(false)}>Enter Deathar <span>↓</span></button></div>}
     <nav className="nav wrap">
       <a className="wordmark" href="#top">DEATHAR<span>®</span></a>
       <div className="nav-links"><a href="#experience">Experience</a><a href="#lineup">Lineup</a><a href="#tickets">Tickets</a></div>
@@ -50,9 +46,9 @@ export default function Home() {
       <div className="stats"><div><b>08</b><span>HOURS OF<br />SOUND</span></div><div><b>03</b><span>FEATURED<br />ARTISTS</span></div><div><b>01</b><span>UNFORGETTABLE<br />NIGHT</span></div></div>
     </section>
 
-    <section className="performer-sign"><img src="/images/dj-akil-landscape.png" alt="DJ Akil at Deathar" /><div className="performer-shade" /><div className="performer-copy wrap"><p>PERFORMING ARTIST · CHAPTER 007</p><h2>DJ <i>AKIL</i></h2><span>AFRO HOUSE · LIVE SET</span><button className="sign-link" onClick={() => setOpen(true)}>Grab your ticket <b>↗</b></button></div><div className="sign-stamp">DEATHAR<br /><b>07</b></div></section>
+    <section className="performer-sign"><img src="/images/dj-akil-landscape.png" alt="DJ Akiiy at Deathar" /><div className="performer-shade" /><div className="performer-copy wrap"><p>PERFORMING ARTIST · CHAPTER 007</p><h2>DJ <i>AKIIY</i></h2><span>AFRO HOUSE · LIVE SET</span><button className="sign-link" onClick={() => setOpen(true)}>Grab your ticket <b>↗</b></button></div><div className="sign-stamp">DEATHAR<br /><b>07</b></div></section>
 
-    <section className="lineup" id="lineup"><div className="wrap"><p className="section-no">02 — SONIC ARCHITECTS</p><div className="section-title"><h2>The ones<br />who <i>move us.</i></h2><p>Handpicked selectors. No filler.<br />Only the feeling.</p></div><div className="artist-grid">{artists.map((artist, index) => <article className={`artist ${artist.tone}`} key={artist.name}><div className="artist-art"><span>{String(index + 1).padStart(2, "0")}</span><div className="orb" /></div><div className="artist-info"><p>{artist.role}</p><h3>{artist.name}</h3><a href="#tickets">Discover artist <b>↗</b></a></div></article>)}</div></div></section>
+    <section className="lineup" id="lineup"><div className="wrap"><p className="section-no">02 — SONIC ARCHITECTS</p><div className="section-title"><h2>The ones<br />who <i>move us.</i></h2><p>Handpicked selectors. No filler.<br />Only the feeling.</p></div><div className="artist-grid">{artists.map((artist, index) => <article className={`artist ${artist.tone} artist-featured`} key={artist.name}><div className="artist-art"><span>{String(index + 1).padStart(2, "0")}</span><img src={artist.image} alt="DJ Akiiy, Deathar headliner" /></div><div className="artist-info"><p>{artist.role}</p><h3>{artist.name}</h3><a href="#tickets">Discover artist <b>↗</b></a></div></article>)}<article className="artist artist-unknown"><div className="artist-art"><span>02</span><b>?</b><i>REVEAL<br />SOON</i></div><div className="artist-info"><p>LIVE SET</p><h3>TO BE<br />ANNOUNCED</h3><a href="#tickets">Stay tuned <b>↗</b></a></div></article><article className="artist artist-unknown"><div className="artist-art"><span>03</span><b>?</b><i>REVEAL<br />SOON</i></div><div className="artist-info"><p>OPENING ACT</p><h3>TO BE<br />ANNOUNCED</h3><a href="#tickets">Stay tuned <b>↗</b></a></div></article></div></div></section>
 
     <section className="tickets wrap" id="tickets"><p className="section-no">03 — SECURE YOUR PLACE</p><div className="ticket-heading"><h2>Choose your<br /><i>entry point.</i></h2><p>Pre-order now and receive <b>20% off.</b><br />Limited quantities. Once a tier is gone, it&apos;s gone.</p></div><div className="ticket-grid"><article className="ticket"><p>01 / EARLY ACCESS · 20% OFF</p><h3>GRAB YOUR<br />TICKETS</h3><strong>LKR 8,000 <del>LKR 10,000</del></strong><span>Pre-order release · Limited to 100</span><button onClick={() => setOpen(true)}>Grab now <b>→</b></button></article><article className="ticket ticket-dark"><p>02 / FULL EXPERIENCE · 20% OFF</p><h3>DEATHAR<br />PASS</h3><strong>LKR 12,000 <del>LKR 15,000</del></strong><span>Pre-order · Priority entry · Event keepsake</span><button onClick={() => setOpen(true)}>Grab now <b>→</b></button></article></div></section>
 
