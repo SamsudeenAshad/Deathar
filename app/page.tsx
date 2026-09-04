@@ -12,6 +12,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
+  const [flyerOpen, setFlyerOpen] = useState(true);
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const registration = Object.fromEntries(new FormData(event.currentTarget));
@@ -21,6 +22,7 @@ export default function Home() {
   };
 
   return <main>
+    {flyerOpen && <div className="flyer-ad" role="dialog" aria-modal="true" aria-label="DJ Akil event announcement"><div className="flyer-glow" /><div className="flyer-card"><button className="flyer-close" onClick={() => setFlyerOpen(false)} aria-label="Close advertisement">×</button><div className="flyer-image-wrap"><img src="/images/dj-akil-flyer.png" alt="DJ Akil performing artist flyer for Deathar Chapter 007" /><span className="flyer-shine" /></div><div className="flyer-actions"><div><p>CHAPTER 007 · PERFORMING ARTIST</p><h2>DJ AKIL</h2></div><button className="primary" onClick={() => { setFlyerOpen(false); setOpen(true); }}>Grab tickets <b>→</b></button></div></div><button className="flyer-skip" onClick={() => setFlyerOpen(false)}>Enter Deathar <span>↓</span></button></div>}
     <nav className="nav wrap">
       <a className="wordmark" href="#top">DEATHAR<span>®</span></a>
       <div className="nav-links"><a href="#experience">Experience</a><a href="#lineup">Lineup</a><a href="#tickets">Tickets</a></div>
