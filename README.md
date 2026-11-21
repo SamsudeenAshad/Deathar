@@ -1,5 +1,7 @@
 # Deathar
 
+https://deathar.vercel.app/
+
 Deathar is a Next.js event-registration website configured for server-side rendering on Vercel.
 
 ## Deploy to Vercel
